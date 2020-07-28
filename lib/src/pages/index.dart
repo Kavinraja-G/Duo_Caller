@@ -31,80 +31,137 @@ class IndexState extends State<IndexPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Agora Flutter QuickStart'),
+        title: Text('Duo Caller'),
+        backgroundColor: Colors.blue[900],
       ),
-      body: Center(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          height: 400,
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Expanded(
-                      child: TextField(
-                    controller: _channelController,
-                    decoration: InputDecoration(
-                      errorText:
-                          _validateError ? 'Channel name is mandatory' : null,
-                      border: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 1),
-                      ),
-                      hintText: 'Channel name',
-                    ),
-                  ))
-                ],
-              ),
-              Column(
-                children: [
-                  ListTile(
-                    title: Text(ClientRole.Broadcaster.toString()),
-                    leading: Radio(
-                      value: ClientRole.Broadcaster,
-                      groupValue: _role,
-                      onChanged: (ClientRole value) {
-                        setState(() {
-                          _role = value;
-                        });
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    title: Text(ClientRole.Audience.toString()),
-                    leading: Radio(
-                      value: ClientRole.Audience,
-                      groupValue: _role,
-                      onChanged: (ClientRole value) {
-                        setState(() {
-                          _role = value;
-                        });
-                      },
-                    ),
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Row(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        elevation: 15,
+        onPressed: onJoin,
+        child: Icon(
+          Icons.call,
+          color: Colors.blue[900],
+        ),
+      ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        color: Colors.blue[900],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+                icon: Icon(
+                  Icons.history,
+                  color: Colors.white,
+                ),
+                onPressed: () {}),
+            IconButton(
+                icon: Icon(
+                  Icons.contacts,
+                  color: Colors.white,
+                ),
+                onPressed: () {})
+          ],
+        ),
+      ),
+
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: RadialGradient(
+              radius: 1,
+              colors: [Colors.blue[800],Colors.white],  
+              stops: [0.2, 1],   
+            ),
+        ),
+        child: Center(
+          child: SizedBox(
+              height: 150,
+              child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Card(
+                elevation: 10,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Column(
                   children: <Widget>[
-                    Expanded(
-                      child: RaisedButton(
-                        onPressed: onJoin,
-                        child: Text('Join'),
-                        color: Colors.blueAccent,
-                        textColor: Colors.white,
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: TextField(
+                            controller: _channelController,
+                            decoration: InputDecoration(
+                              errorText:
+                                  _validateError ? 'Channel name is mandatory' : null,
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(width: 1),
+                              ),
+                              hintText: 'Channel name',
+                              hintStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ))
+                        ],
                       ),
-                    )
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Radio(
+                          value: ClientRole.Broadcaster,
+                          activeColor: Colors.blue[900],
+                          groupValue: _role,
+                          onChanged: (ClientRole value) {
+                              setState(() {
+                                _role = value;
+                            });
+                          },
+                        ),
+                        Text(
+                          'Create',
+                          style: TextStyle(
+                          color: Colors.black,
+                          ),
+                        ),
+                        Text("        "),
+                        Text("        "),
+                        Radio(
+                            activeColor: Colors.blue[900],
+                            value: ClientRole.Audience,
+                            groupValue: _role,
+                            onChanged: (ClientRole value) {
+                              setState(() {
+                                _role = value;
+                              });
+                            },
+                        ),
+                        Text(
+                          'Join',
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                    
                   ],
                 ),
-              )
-            ],
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 
+
+//Joining the call 
   Future<void> onJoin() async {
     // update input validation
     setState(() {
