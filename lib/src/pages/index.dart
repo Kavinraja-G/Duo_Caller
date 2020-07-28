@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:agora_flutter_quickstart/src/pages/contacts.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -43,9 +44,7 @@ class IndexState extends State<IndexPage> {
           color: Colors.blue[900],
         ),
       ),
-
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         color: Colors.blue[900],
@@ -67,19 +66,18 @@ class IndexState extends State<IndexPage> {
           ],
         ),
       ),
-
       body: Container(
         decoration: BoxDecoration(
-            gradient: RadialGradient(
-              radius: 1,
-              colors: [Colors.blue[800],Colors.white],  
-              stops: [0.2, 1],   
-            ),
+          gradient: RadialGradient(
+            radius: 1,
+            colors: [Colors.blue[800], Colors.white],
+            stops: [0.2, 1],
+          ),
         ),
         child: Center(
           child: SizedBox(
-              height: 150,
-              child: Padding(
+            height: 200,
+            child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Card(
                 elevation: 10,
@@ -95,9 +93,11 @@ class IndexState extends State<IndexPage> {
                           Expanded(
                               child: TextField(
                             controller: _channelController,
+                            textAlign: TextAlign.center,
                             decoration: InputDecoration(
-                              errorText:
-                                  _validateError ? 'Channel name is mandatory' : null,
+                              errorText: _validateError
+                                  ? 'Channel name is mandatory'
+                                  : null,
                               border: UnderlineInputBorder(
                                 borderSide: BorderSide(width: 1),
                               ),
@@ -118,28 +118,38 @@ class IndexState extends State<IndexPage> {
                           activeColor: Colors.blue[900],
                           groupValue: _role,
                           onChanged: (ClientRole value) {
-                              setState(() {
-                                _role = value;
+                            setState(() {
+                              _role = value;
                             });
                           },
                         ),
                         Text(
                           'Create',
                           style: TextStyle(
-                          color: Colors.black,
+                            color: Colors.black,
                           ),
                         ),
-                        Text("        "),
-                        Text("        "),
+                        Text('        '),  
+                        IconButton(
+                          icon: Icon(
+                            Icons.contact_phone,
+                            color: Colors.blue[900],
+                            size: 30,
+                          ),
+                          onPressed: () => Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => MyContacts()),
+                          ),
+                        ),
+                        Text('        '),
                         Radio(
-                            activeColor: Colors.blue[900],
-                            value: ClientRole.Audience,
-                            groupValue: _role,
-                            onChanged: (ClientRole value) {
-                              setState(() {
-                                _role = value;
-                              });
-                            },
+                          activeColor: Colors.blue[900],
+                          value: ClientRole.Audience,
+                          groupValue: _role,
+                          onChanged: (ClientRole value) {
+                            setState(() {
+                              _role = value;
+                            });
+                          },
                         ),
                         Text(
                           'Join',
@@ -149,7 +159,6 @@ class IndexState extends State<IndexPage> {
                         ),
                       ],
                     ),
-                    
                   ],
                 ),
               ),
@@ -160,8 +169,7 @@ class IndexState extends State<IndexPage> {
     );
   }
 
-
-//Joining the call 
+//Joining the call
   Future<void> onJoin() async {
     // update input validation
     setState(() {
