@@ -1,4 +1,4 @@
-package com.example.agoraflutterquickstart;
+package com.example.callerduo;
 
 import io.flutter.embedding.android.FlutterActivity;
 

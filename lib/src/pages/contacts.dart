@@ -1,3 +1,4 @@
+import 'package:agora_flutter_quickstart/src/services/firestore_db.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 
@@ -75,9 +76,13 @@ class _MyContactsState extends State<MyContacts> {
                   Expanded(
                     child: ListView.builder(
                         shrinkWrap: true,
-                        itemCount: _isSearchingContacts == true ? filterdContacts.length :contacts.length,
+                        itemCount: _isSearchingContacts == true
+                            ? filterdContacts.length
+                            : contacts.length,
                         itemBuilder: (context, index) {
-                          Contact contact = _isSearchingContacts == true ? filterdContacts[index] : contacts[index];
+                          Contact contact = _isSearchingContacts == true
+                              ? filterdContacts[index]
+                              : contacts[index];
                           return Card(
                             elevation: 5,
                             child: ListTile(
@@ -93,7 +98,22 @@ class _MyContactsState extends State<MyContacts> {
                                 title: Text(contact.displayName),
                                 subtitle: (contact.phones.length > 0)
                                     ? Text(contact.phones.elementAt(0).value)
-                                    : null),
+                                    : null,
+                                trailing: isRegisteredUser(
+                                        contact.phones.elementAt(0).value) == true
+                                    ? IconButton(
+                                        icon: Icon(
+                                          Icons.call,
+                                          color: Colors.green,
+                                        ),
+                                        onPressed: () {},
+                                      )
+                                    : FlatButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          'INVITE',
+                                          style: TextStyle(color: Colors.red),
+                                        ))),
                           );
                         }),
                   ),
@@ -101,5 +121,25 @@ class _MyContactsState extends State<MyContacts> {
               ),
             ),
     );
+  }
+
+  Future<bool> isRegisteredUser(String phoneNumber) async{
+    final firestoreService = FirestoreService();
+    if (phoneNumber.length == 13 && phoneNumber.substring(0, 3) == '+91') {
+      if (await firestoreService.checkForPhoneNumber(phoneNumber) == true) {
+        return true;
+      } else {
+        print('ccc $phoneNumber');
+        return false;
+      }
+    } else if (phoneNumber.length == 10) {
+      if (await firestoreService.checkForPhoneNumber('+91' + phoneNumber) == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 }

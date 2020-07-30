@@ -16,8 +16,10 @@ abstract class BaseAuthentication {
   Future<User> signInWithGoogle();
   Future<void> signOut();
   Future<User> currentUser();
+  Future<String> currentUserUID();
+  Future<String> getPhoneNumber();
   Stream<FirebaseUser> get currentFirebaseUser;
-  Future<FirebaseUser> getCurrentFirebaseUser();
+  FirebaseAuth getAuth();
 }
 
 class Auth implements BaseAuthentication {
@@ -78,13 +80,24 @@ class Auth implements BaseAuthentication {
   }
 
   @override
+  Future<String> currentUserUID() async {
+    final user = await FirebaseAuth.instance.currentUser();
+    return user.uid;
+  }
+
+  @override
   Stream<FirebaseUser> get currentFirebaseUser {
     return FirebaseAuth.instance.onAuthStateChanged.map((event) => (event));
   }
 
   @override
-  Future<FirebaseUser> getCurrentFirebaseUser() async {
+  FirebaseAuth getAuth() {
+    return FirebaseAuth.instance;
+  }
+
+  @override
+  Future<String> getPhoneNumber() async {
     final user = await FirebaseAuth.instance.currentUser();
-    return user;
+    return user.phoneNumber;
   }
 }

@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "171205490951",
-    "firebase_url": "https://callerduo-cf227.firebaseio.com",
-    "project_id": "callerduo-cf227",
-    "storage_bucket": "callerduo-cf227.appspot.com"
+    "project_number": "277731654850",
+    "firebase_url": "https://caller-duo.firebaseio.com",
+    "project_id": "caller-duo",
+    "storage_bucket": "caller-duo.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:171205490951:android:597d9f29606bbe08f3ada2",
+        "mobilesdk_app_id": "1:277731654850:android:1f04d62d625d715019cf5b",
         "android_client_info": {
           "package_name": "com.example.callerduo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "171205490951-nho7i2g5th9dt37du5g9ankucpuns3s2.apps.googleusercontent.com",
+          "client_id": "277731654850-drjie7db5dslv6njrcm1ufnpsbct5dqq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.callerduo",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "171205490951-h48unl68evllsg5ukag1l53hc8j8rmij.apps.googleusercontent.com",
+          "client_id": "277731654850-i4qi0tilfl6aaer1t1bod8cc1hk7k2tm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC2dr3ak8-kDSQmoMACBntiPR7P-iQonCI"
+          "current_key": "AIzaSyBQzdqmp9krMGcgBUIcjL4knOPz2ePL-0o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "171205490951-h48unl68evllsg5ukag1l53hc8j8rmij.apps.googleusercontent.com",
+              "client_id": "277731654850-i4qi0tilfl6aaer1t1bod8cc1hk7k2tm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

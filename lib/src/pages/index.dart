@@ -1,13 +1,18 @@
 import 'dart:async';
-
+import 'package:agora_flutter_quickstart/src/models/usermodel.dart';
 import 'package:agora_flutter_quickstart/src/pages/contacts.dart';
+import 'package:agora_flutter_quickstart/src/services/firestore_db.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import './call.dart';
 
 class IndexPage extends StatefulWidget {
+  String phoneNumber;
+  IndexPage([this.phoneNumber]);
+
   @override
   State<StatefulWidget> createState() => IndexState();
 }
@@ -20,6 +25,25 @@ class IndexState extends State<IndexPage> {
   bool _validateError = false;
 
   ClientRole _role = ClientRole.Broadcaster;
+
+  //Firestore DB and Firemessaging Config
+  final FirebaseMessaging _fcm = FirebaseMessaging();
+  final FirestoreService firestoreService = FirestoreService();
+  @override
+  void initState() {
+    super.initState();
+    _saveDeviceToken(widget.phoneNumber);
+  }
+
+  _saveDeviceToken(String phone) async {
+    // ignore: omit_local_variable_types
+    String fcmToken = await _fcm.getToken();
+    registeredUser currentRegUser =
+        registeredUser(phoneNumber: phone, userToken: fcmToken);
+    if (fcmToken != null) {
+      await firestoreService.saveRegisteredUser(currentRegUser);
+    }
+  }
 
   @override
   void dispose() {
@@ -129,15 +153,17 @@ class IndexState extends State<IndexPage> {
                             color: Colors.black,
                           ),
                         ),
-                        Text('        '),  
+                        Text('        '),
                         IconButton(
                           icon: Icon(
                             Icons.contact_phone,
                             color: Colors.blue[900],
                             size: 30,
                           ),
-                          onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MyContacts()),
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyContacts()),
                           ),
                         ),
                         Text('        '),
