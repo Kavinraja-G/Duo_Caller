@@ -1,3 +1,4 @@
+import 'package:agora_flutter_quickstart/src/pages/landingpage.dart';
 import 'package:flutter/material.dart';
 
 import './src/pages/index.dart';
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: IndexPage(),
+      home: LandingPage(),
     );
   }
 }

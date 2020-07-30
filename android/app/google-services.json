@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "171205490951",
+    "firebase_url": "https://callerduo-cf227.firebaseio.com",
+    "project_id": "callerduo-cf227",
+    "storage_bucket": "callerduo-cf227.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171205490951:android:597d9f29606bbe08f3ada2",
+        "android_client_info": {
+          "package_name": "com.example.callerduo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171205490951-nho7i2g5th9dt37du5g9ankucpuns3s2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.callerduo",
+            "certificate_hash": "69e623b92c8620da45163b37eee0c29d82ee4922"
+          }
+        },
+        {
+          "client_id": "171205490951-h48unl68evllsg5ukag1l53hc8j8rmij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2dr3ak8-kDSQmoMACBntiPR7P-iQonCI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171205490951-h48unl68evllsg5ukag1l53hc8j8rmij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
